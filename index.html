@@ -1,0 +1,458 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Guía: Construcción de un To-Do List con JSP y Bootstrap</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+    <!-- Bootstrap Icons -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
+    <style>
+        body {
+            background-color: #f8f9fa;
+            padding-top: 20px;
+            padding-bottom: 60px;
+        }
+        .logo {
+            width: 150px;
+        }
+        .footer {
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+            text-align: center;
+            padding: 10px 0;
+            background-color: #f8f9fa;
+            color: #6c757d;
+        }
+        pre {
+            background-color: #2d2d2d;
+            color: #f8f8f2;
+            padding: 15px;
+            border-radius: 5px;
+            overflow-x: auto;
+        }
+        code {
+            font-family: Consolas, Monaco, 'Andale Mono', 'Ubuntu Mono', monospace;
+        }
+        .section-title {
+            margin-top: 40px;
+            margin-bottom: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Logo y Títulos -->
+        <div class="text-center mb-5">
+            <img src="https://dondeestudiar.pe/wp-content/uploads/2022/12/UTP.jpg" alt="Logo UTP Chimbote" class="logo mb-3">
+            <h1 class="mb-1">Semana 10 - JSP con Bootstrap</h1>
+            <h4 class="text-muted">Asignatura: Desarrollo Web Integrado</h4>
+        </div>
+
+        <!-- Instrucciones Generales -->
+        <div>
+            <h2 class="section-title">Instrucciones</h2>
+            <p>Implementar el siguiente To-Do List utilizando Bootstrap. Utiliza este logo que es de la UTP Chimbote:</p>
+            <p><a href="https://dondeestudiar.pe/wp-content/uploads/2022/12/UTP.jpg" target="_blank">Logo UTP Chimbote</a></p>
+            <p>Al final, incluye el nombre del docente: <strong>Ms. Johan Max Alexander López Heredia</strong></p>
+        </div>
+
+        <!-- 1. Página JSP de Login (login.jsp) -->
+        <div>
+            <h2 class="section-title">1. Página JSP de Login (login.jsp)</h2>
+            <p>A continuación se presenta el código para la página de login:</p>
+            <pre><code>&lt;%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %&gt;
+&lt;!DOCTYPE html&gt;
+&lt;html lang="es"&gt;
+    &lt;head&gt;
+        &lt;meta charset="utf-8"&gt;
+        &lt;title&gt;Login&lt;/title&gt;
+        &lt;meta name="viewport" content="width=device-width, initial-scale=1"&gt;
+        &lt;link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous"&gt;
+    &lt;/head&gt;
+    &lt;body&gt;
+        &lt;div class="container mt-5 d-flex justify-content-center align-items-center vh-100"&gt;
+            &lt;div class="card shadow" style="width: 25rem;"&gt;
+                &lt;div class="card-body"&gt;
+                    &lt;h3 class="-r mb-4"&gt;Login&lt;/h3&gt;
+                    &lt;form method="POST" action="index.jsp"&gt;
+                        &lt;div class="mb-3"&gt;
+                            &lt;label for="usuario" class="form-label"&gt;Usuario&lt;/label&gt;
+                            &lt;input type="text" class="form-control" id="usuario" name="usuario" required&gt;&lt;/input&gt;
+                        &lt;/div&gt;
+                        &lt;div class="mb-3"&gt;
+                            &lt;label for="password" class="form-label"&gt;Password&lt;/label&gt;
+                            &lt;input type="password" class="form-control" id="password" name="Contraseña" required&gt;&lt;/input&gt;
+                        &lt;/div&gt;
+                        &lt;button type="submit" class="btn btn-primary w-100"&gt;Login&lt;/button&gt;
+                    &lt;/form&gt;
+                &lt;/div&gt;
+            &lt;/div&gt;
+        &lt;/div&gt;
+
+        &lt;script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"&gt;&lt;/script&gt;
+    &lt;/body&gt;
+&lt;/html&gt;</code></pre>
+
+            <h5>Observaciones:</h5>
+            <ul>
+                <li><strong>Formulario de Login:</strong> El formulario envía una solicitud POST a <code>index.jsp</code>. Sin embargo, no hay lógica en <code>index.jsp</code> para manejar esta solicitud.</li>
+                <li><strong>Campos de Entrada:</strong> Hay un pequeño error en el nombre del campo de contraseña. El atributo <code>name</code> para el campo de contraseña está en español (<code>Contraseña</code>), lo cual puede complicar el manejo en el backend que típicamente usa nombres en inglés.</li>
+                <li><strong>Estilo:</strong> Utiliza Bootstrap para el diseño, lo cual es adecuado para una interfaz responsiva y moderna.</li>
+            </ul>
+        </div>
+
+        <!-- 2. Servlet (HelloServlet.java) -->
+        <div>
+            <h2 class="section-title">2. Servlet (HelloServlet.java)</h2>
+            <p>A continuación se presenta el código para el servlet HelloServlet:</p>
+            <pre><code>package com.example.bootstrapjsp;
+
+import java.io.*;
+
+import jakarta.servlet.http.*;
+import jakarta.servlet.annotation.*;
+
+@WebServlet(name = "helloServlet", value = "/hello-servlet")
+public class HelloServlet extends HttpServlet {
+    private String message;
+
+    public void init() {
+        message = "Hello World!";
+    }
+
+    public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
+        response.setContentType("text/html");
+
+        // Hello
+        PrintWriter out = response.getWriter();
+        out.println("&lt;html&gt;&lt;body&gt;");
+        out.println("&lt;h1&gt;" + message + "&lt;/h1&gt;");
+        out.println("&lt;/body&gt;&lt;/html&gt;");
+    }
+
+    public void destroy() {
+    }
+}</code></pre>
+
+            <h5>Observaciones:</h5>
+            <ul>
+                <li><strong>Funcionalidad Actual:</strong> Este servlet simplemente muestra "Hello World!" cuando se accede a la ruta <code>/hello-servlet</code>.</li>
+                <li><strong>Relevancia:</strong> Actualmente, no está vinculado con la funcionalidad de login o la lista de tareas. Necesitaremos modificar o agregar nuevos servlets para manejar la autenticación y la lógica de la lista de tareas.</li>
+            </ul>
+        </div>
+
+        <!-- 3. Archivo pom.xml -->
+        <div>
+            <h2 class="section-title">3. Archivo pom.xml</h2>
+            <p>El archivo <code>pom.xml</code> está configurado correctamente con las dependencias necesarias para usar servlets de Jakarta y Bootstrap vía WebJars.</p>
+        </div>
+
+        <!-- Implementación de las Nuevas Funcionalidades -->
+        <div>
+            <h2 class="section-title">Implementación de las Nuevas Funcionalidades</h2>
+            <p>Para agregar las funcionalidades requeridas, seguiremos estos pasos:</p>
+            <ol>
+                <li>Configurar las credenciales de usuario en el backend.</li>
+                <li>Crear un servlet para manejar el login y la autenticación.</li>
+                <li>Crear una página JSP para la lista de tareas (To-Do List) con Bootstrap y Bootstrap Icons.</li>
+                <li>Implementar la funcionalidad de cierre de sesión.</li>
+                <li>Agregar validaciones y manejo de sesiones para asegurar que solo usuarios autenticados puedan acceder a la lista de tareas.</li>
+            </ol>
+        </div>
+
+        <!-- 1. Configurar las Credenciales de Usuario -->
+        <div>
+            <h3 class="section-title">1. Configurar las Credenciales de Usuario</h3>
+            <p>Definiremos unas credenciales simples dentro del servlet de autenticación. Por ejemplo:</p>
+            <ul>
+                <li><strong>Usuario:</strong> admin</li>
+                <li><strong>Contraseña:</strong> password123</li>
+            </ul>
+        </div>
+
+        <!-- 2. Crear el Servlet de Autenticación (LoginServlet.java) -->
+        <div>
+            <h3 class="section-title">2. Crear el Servlet de Autenticación (LoginServlet.java)</h3>
+            <p>Este servlet manejará las solicitudes de login, verificará las credenciales y gestionará la sesión del usuario.</p>
+            <pre><code>package com.example.bootstrapjsp;
+
+import java.io.IOException;
+import jakarta.servlet.ServletException;
+import jakarta.servlet.annotation.WebServlet;
+import jakarta.servlet.http.*;
+
+@WebServlet(name = "LoginServlet", value = "/login")
+public class LoginServlet extends HttpServlet {
+    // Credenciales predeterminadas
+    private static final String USER = "admin";
+    private static final String PASS = "password123";
+
+    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        String usuario = request.getParameter("usuario");
+        String contraseña = request.getParameter("Contraseña"); // Asegúrate de que el nombre coincida con el del formulario
+
+        if(USER.equals(usuario) && PASS.equals(contraseña)) {
+            // Credenciales correctas
+            HttpSession session = request.getSession();
+            session.setAttribute("usuario", usuario);
+            response.sendRedirect("todo.jsp");
+        } else {
+            // Credenciales incorrectas
+            request.setAttribute("error", "Usuario o contraseña incorrectos");
+            request.getRequestDispatcher("login.jsp").forward(request, response);
+        }
+    }
+}</code></pre>
+
+            <h5>Notas Importantes:</h5>
+            <ul>
+                <li><strong>Nombre de los Parámetros:</strong> Asegúrate de que el atributo <code>name</code> en los campos de entrada del formulario coincida con los nombres utilizados en el servlet (<code>usuario</code> y <code>Contraseña</code>).</li>
+                <li><strong>Manejo de Sesiones:</strong> Utilizamos <code>HttpSession</code> para almacenar la información del usuario autenticado.</li>
+                <li><strong>Redirección:</strong> Si las credenciales son correctas, el usuario es redirigido a <code>todo.jsp</code>. Si son incorrectas, se muestra un mensaje de error en la página de login.</li>
+            </ul>
+        </div>
+
+        <!-- 3. Modificar la Página de Login (login.jsp) -->
+        <div>
+            <h3 class="section-title">3. Modificar la Página de Login (login.jsp)</h3>
+            <p>Actualizaremos el formulario para que envíe la solicitud al nuevo servlet de login y mostrará mensajes de error si las credenciales son incorrectas.</p>
+            <pre><code>&lt;%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %&gt;
+&lt;!DOCTYPE html&gt;
+&lt;html lang="es"&gt;
+    &lt;head&gt;
+        &lt;meta charset="utf-8"&gt;
+        &lt;title&gt;Login&lt;/title&gt;
+        &lt;meta name="viewport" content="width=device-width, initial-scale=1"&gt;
+        &lt;link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous"&gt;
+    &lt;/head&gt;
+    &lt;body&gt;
+        &lt;div class="container mt-5 d-flex justify-content-center align-items-center vh-100"&gt;
+            &lt;div class="card shadow" style="width: 25rem;"&gt;
+                &lt;div class="card-body"&gt;
+                    &lt;h3 class="mb-4"&gt;Login&lt;/h3&gt;
+                    &lt;% if (request.getAttribute("error") != null) { %&gt;
+                        &lt;div class="alert alert-danger" role="alert"&gt;
+                            &lt;%= request.getAttribute("error") %&gt;
+                        &lt;/div&gt;
+                    &lt;% } %&gt;
+                    &lt;form method="POST" action="login"&gt;
+                        &lt;div class="mb-3"&gt;
+                            &lt;label for="usuario" class="form-label"&gt;Usuario&lt;/label&gt;
+                            &lt;input type="text" class="form-control" id="usuario" name="usuario" required&gt;
+                        &lt;/div&gt;
+                        &lt;div class="mb-3"&gt;
+                            &lt;label for="password" class="form-label"&gt;Password&lt;/label&gt;
+                            &lt;input type="password" class="form-control" id="password" name="Contraseña" required&gt;
+                        &lt;/div&gt;
+                        &lt;button type="submit" class="btn btn-primary w-100"&gt;Login&lt;/button&gt;
+                    &lt;/form&gt;
+                &lt;/div&gt;
+            &lt;/div&gt;
+        &lt;/div&gt;
+
+        &lt;script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"&gt;&lt;/script&gt;
+    &lt;/body&gt;
+&lt;/html&gt;</code></pre>
+
+            <h5>Cambios Realizados:</h5>
+            <ul>
+                <li><strong>Acción del Formulario:</strong> Cambié el atributo <code>action</code> de <code>index.jsp</code> a <code>login</code> para que apunte al nuevo servlet (<code>LoginServlet</code>).</li>
+                <li><strong>Manejo de Errores:</strong> Añadí una sección para mostrar mensajes de error si las credenciales son incorrectas.</li>
+                <li><strong>Corrección de Etiquetas:</strong> Eliminé las etiquetas de cierre <code>&lt;/input&gt;</code> que no son necesarias en HTML5.</li>
+            </ul>
+        </div>
+
+        <!-- 4. Crear la Página de Lista de Tareas (todo.jsp) -->
+        <div>
+            <h3 class="section-title">4. Crear la Página de Lista de Tareas (todo.jsp)</h3>
+            <p>Esta página mostrará una lista de tareas y permitirá al usuario agregar nuevas tareas. También incluirá la opción de cerrar sesión.</p>
+            <pre><code>&lt;%@ page import="java.util.ArrayList" %&gt;
+&lt;%@ page import="javax.servlet.http.HttpSession" %&gt;
+&lt;%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %&gt;
+&lt;%
+    HttpSession session = request.getSession(false);
+    if (session == null || session.getAttribute("usuario") == null) {
+        response.sendRedirect("login.jsp");
+        return;
+    }
+
+    // Manejo de tareas en sesión
+    ArrayList&lt;String&gt; tareas = (ArrayList&lt;String&gt;) session.getAttribute("tareas");
+    if (tareas == null) {
+        tareas = new ArrayList&lt;&gt;();
+    }
+
+    String nuevaTarea = request.getParameter("tarea");
+    if (nuevaTarea != null && !nuevaTarea.trim().isEmpty()) {
+        tareas.add(nuevaTarea.trim());
+        session.setAttribute("tareas", tareas);
+    }
+
+    String eliminarTarea = request.getParameter("eliminar");
+    if (eliminarTarea != null) {
+        tareas.remove(eliminarTarea);
+        session.setAttribute("tareas", tareas);
+    }
+%&gt;
+&lt;!DOCTYPE html&gt;
+&lt;html lang="es"&gt;
+&lt;head&gt;
+    &lt;meta charset="UTF-8"&gt;
+    &lt;title&gt;Lista de Tareas&lt;/title&gt;
+    &lt;meta name="viewport" content="width=device-width, initial-scale=1"&gt;
+    &lt;!-- Bootstrap CSS y Bootstrap Icons --&gt;
+    &lt;link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous"&gt;
+    &lt;link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css"&gt;
+&lt;/head&gt;
+&lt;body&gt;
+    &lt;nav class="navbar navbar-expand-lg navbar-light bg-light"&gt;
+        &lt;div class="container-fluid"&gt;
+            &lt;a class="navbar-brand" href="#"&gt;To-Do List&lt;/a&gt;
+            &lt;div class="d-flex"&gt;
+                &lt;a href="logout" class="btn btn-outline-danger"&gt;
+                    &lt;i class="bi bi-box-arrow-right"&gt;&lt;/i&gt; Cerrar Sesión
+                &lt;/a&gt;
+            &lt;/div&gt;
+        &lt;/div&gt;
+    &lt;/nav&gt;
+
+    &lt;div class="container mt-4"&gt;
+        &lt;h2&gt;Hola, &lt;%= session.getAttribute("usuario") %&gt;!&lt;/h2&gt;
+        &lt;form method="GET" action="todo.jsp" class="d-flex mb-3"&gt;
+            &lt;input type="text" name="tarea" class="form-control me-2" placeholder="Nueva tarea" required&gt;
+            &lt;button type="submit" class="btn btn-success"&gt;
+                &lt;i class="bi bi-plus-circle"&gt;&lt;/i&gt; Agregar
+            &lt;/button&gt;
+        &lt;/form&gt;
+
+        &lt;ul class="list-group"&gt;
+            &lt;% for (String tarea : tareas) { %&gt;
+                &lt;li class="list-group-item d-flex justify-content-between align-items-center"&gt;
+                    &lt;%= tarea %&gt;
+                    &lt;a href="todo.jsp?eliminar=&lt;%= tarea %&gt;" class="btn btn-danger btn-sm"&gt;
+                        &lt;i class="bi bi-trash"&gt;&lt;/i&gt;
+                    &lt;/a&gt;
+                &lt;/li&gt;
+            &lt;% } %&gt;
+        &lt;/ul&gt;
+    &lt;/div&gt;
+
+    &lt;!-- Bootstrap JS --&gt;
+    &lt;script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"&gt;&lt;/script&gt;
+&lt;/body&gt;
+&lt;/html&gt;</code></pre>
+
+            <h5>Características de todo.jsp:</h5>
+            <ul>
+                <li><strong>Autenticación:</strong> Verifica si el usuario está autenticado mediante la sesión. Si no lo está, redirige a la página de login.</li>
+                <li><strong>Manejo de Tareas:</strong>
+                    <ul>
+                        <li>Las tareas se almacenan en la sesión como una lista <code>ArrayList&lt;String&gt;</code>.</li>
+                        <li>Permite agregar nuevas tareas mediante un formulario.</li>
+                        <li>Permite eliminar tareas mediante un enlace que pasa el nombre de la tarea a eliminar.</li>
+                    </ul>
+                </li>
+                <li><strong>Estilo y Diseño:</strong> Utiliza Bootstrap para un diseño limpio y responsivo. Incorpora Bootstrap Icons para los botones de agregar y eliminar tareas.</li>
+                <li><strong>Cerrar Sesión:</strong> Incluye un botón en la barra de navegación para cerrar sesión, que redirige a un servlet de logout.</li>
+            </ul>
+        </div>
+
+        <!-- 5. Crear el Servlet de Cierre de Sesión (LogoutServlet.java) -->
+        <div>
+            <h3 class="section-title">5. Crear el Servlet de Cierre de Sesión (LogoutServlet.java)</h3>
+            <p>Este servlet invalidará la sesión del usuario y lo redirigirá a la página de login.</p>
+            <pre><code>package com.example.bootstrapjsp;
+
+import java.io.IOException;
+import jakarta.servlet.ServletException;
+import jakarta.servlet.annotation.WebServlet;
+import jakarta.servlet.http.*;
+
+@WebServlet(name = "LogoutServlet", value = "/logout")
+public class LogoutServlet extends HttpServlet {
+    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        HttpSession session = request.getSession(false); // Obtener sesión existente
+        if (session != null) {
+            session.invalidate(); // Invalidar sesión
+        }
+        response.sendRedirect("login.jsp"); // Redirigir al login
+    }
+}</code></pre>
+        </div>
+
+        <!-- 6. Actualizar el Servlet de HelloServlet (Opcional) -->
+        <div>
+            <h3 class="section-title">6. Actualizar el Servlet de HelloServlet (Opcional)</h3>
+            <p>Dado que HelloServlet no está relacionado con las nuevas funcionalidades, puedes optar por eliminarlo o mantenerlo para futuras pruebas.</p>
+        </div>
+
+        <!-- 7. Actualizar el Archivo pom.xml -->
+        <div>
+            <h3 class="section-title">7. Actualizar el Archivo pom.xml</h3>
+            <p>Asegúrate de tener las dependencias correctas para Bootstrap Icons si las estás utilizando vía WebJars. Sin embargo, en el ejemplo anterior, usamos CDN para Bootstrap Icons, por lo que no es estrictamente necesario.</p>
+            <p>Si deseas agregar Bootstrap Icons vía WebJars, puedes añadir:</p>
+            <pre><code>&lt;dependency&gt;
+    &lt;groupId&gt;org.webjars&lt;/groupId&gt;
+    &lt;artifactId&gt;bootstrap-icons&lt;/artifactId&gt;
+    &lt;version&gt;1.10.5&lt;/version&gt;
+&lt;/dependency&gt;</code></pre>
+        </div>
+
+        <!-- 8. Estructura Final del Proyecto -->
+        <div>
+            <h3 class="section-title">8. Estructura Final del Proyecto</h3>
+            <p>Tu proyecto debería tener la siguiente estructura:</p>
+            <pre><code>BootStrapJsp/
+├── src/
+│   ├── main/
+│   │   ├── java/
+│   │   │   └── com/example/bootstrapjsp/
+│   │   │       ├── HelloServlet.java (opcional)
+│   │   │       ├── LoginServlet.java
+│   │   │       └── LogoutServlet.java
+│   │   └── webapp/
+│   │       ├── login.jsp
+│   │       └── todo.jsp
+├── pom.xml</code></pre>
+        </div>
+
+        <!-- Resumen de las Funcionalidades Implementadas -->
+        <div>
+            <h2 class="section-title">Resumen de las Funcionalidades Implementadas</h2>
+            <h4>Autenticación de Usuarios:</h4>
+            <ul>
+                <li>El usuario puede iniciar sesión con las credenciales predefinidas (<code>admin</code> / <code>password123</code>).</li>
+                <li>Se maneja la sesión del usuario para mantener el estado de autenticación.</li>
+            </ul>
+
+            <h4>Lista de Tareas (To-Do List):</h4>
+            <ul>
+                <li>Los usuarios autenticados pueden agregar y eliminar tareas.</li>
+                <li>Las tareas se almacenan en la sesión del usuario.</li>
+            </ul>
+
+            <h4>Estilo y Diseño:</h4>
+            <ul>
+                <li>Se utiliza Bootstrap para un diseño responsivo y moderno.</li>
+                <li>Se incorporan Bootstrap Icons para mejorar la interfaz de usuario.</li>
+            </ul>
+
+            <h4>Cierre de Sesión:</h4>
+            <ul>
+                <li>Los usuarios pueden cerrar sesión, lo que invalida su sesión y los redirige al formulario de login.</li>
+            </ul>
+        </div>
+
+        <!-- Footer -->
+        <div class="footer">
+            Ms. Johan Max Alexander López Heredia
+        </div>
+    </div>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
+</body>
+</html>
